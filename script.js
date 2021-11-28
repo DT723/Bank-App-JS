@@ -6,28 +6,28 @@
 
 // Data
 const account1 = {
-  owner: 'dave t',
+  owner: 'Dave t',
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
   interestRate: 1.2, // %
   pin: 1111,
 };
 
 const account2 = {
-  owner: 'rich b',
+  owner: 'Rich b',
   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
   interestRate: 1.5,
   pin: 2222,
 };
 
 const account3 = {
-  owner: 'lily t',
+  owner: 'Lily t',
   movements: [200, -200, 340, -300, -20, 200, 2400, 460],
   interestRate: 0.7,
   pin: 3333,
 };
 
 const account4 = {
-  owner: 'max t',
+  owner: 'Max t',
   movements: [430, 1000, 700, 50, 90, 500, -40],
   interestRate: 1,
   pin: 4444,
@@ -143,10 +143,10 @@ btnLogin.addEventListener('click', function (e) {
 
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
     // DISPLAY UI AND WELCOME MESSAGE
-    labelWelcome.textContent = `Welcome back, ${
+    labelWelcome.textContent = `Welcome Back, ${
       currentAccount.owner.split(' ')[0]
     }`;
-    containerApp.style.opacity = 100;
+    containerApp.style.opacity = 1;
 
     //CLEAR INPUT FIELDS
     inputLoginUsername.value = inputLoginPin.value = '';
@@ -155,6 +155,44 @@ btnLogin.addEventListener('click', function (e) {
     //Update UI
     updateUI(currentAccount);
   }
+});
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    //ADD movement
+    currentAccount.movements.push(amount);
+
+    //UPDATE UI
+    updateUI(currentAccount);
+  }
+  inputLoanAmount.value = '';
+});
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    const index = accounts.findIndex(
+      acc => acc.username == currentAccount.username
+    );
+    console.log(index);
+
+    //DELETE ACCOUNT
+    accounts.splice(index, 1);
+
+    //HIDE UI
+    containerApp.style.opacity = 0;
+  }
+  labelWelcome.textContent = '';
+  labelWelcome.textContent = 'Log in to get started';
+  inputCloseUsername.value = inputClosePin.value = '';
 });
 
 btnTransfer.addEventListener('click', function (e) {
@@ -178,6 +216,8 @@ btnTransfer.addEventListener('click', function (e) {
     //Update UI
     updateUI(currentAccount);
   }
+
+  inputCloseUsername.value = inputClosePin.value = '';
 });
 
 /////////////////////////////////////////////////
