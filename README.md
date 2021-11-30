@@ -7,7 +7,7 @@ Bank App using JS, HTML, CSS
 * Log out timer when not active
 * Transfer funds between users
 * Request loans (bank must approve loan (3sec timer))
-* Otion to close account
+* Option to close account
 * Shows Current balance for users
 * Shows total money out/in/interest
 * Sort feature to sort from descending order or back to default order.
