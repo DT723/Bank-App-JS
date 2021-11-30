@@ -176,8 +176,37 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
+const startLogOutTimer = function () {
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+
+    //In each call, print remaining time to UI
+    labelTimer.textContent = `${min}:${sec}`;
+
+    //when timer 0, stop timer and log out user
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = 'Log in to get started';
+      containerApp.style.opacity = 0;
+    }
+
+    // Decrease 1s
+    time--;
+  };
+
+  //set time to 5min
+  let time = 180;
+
+  //call timer every sec
+  tick();
+  const timer = setInterval(tick, 1000);
+
+  return timer;
+};
+
 /// EVENT HANDLERS ///
-let currentAccount;
+let currentAccount, timer;
 
 btnLogin.addEventListener('click', function (e) {
   //PREVENT FORM FROM SUBMIT
@@ -223,8 +252,43 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
 
+    //Timer
+    if (timer) clearInterval(timer);
+    timer = startLogOutTimer();
+
     //Update UI
     updateUI(currentAccount);
+  }
+});
+
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = +inputTransferAmount.value;
+  const receiverAcc = accounts.find(
+    acc => acc.username === inputTransferTo.value
+  );
+  inputTransferAmount.value = inputTransferTo.value = '';
+
+  if (
+    amount > 0 &&
+    receiverAcc &&
+    currentAccount.balance >= amount &&
+    receiverAcc?.username !== currentAccount.username
+  ) {
+    //DO TRANSFER
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+
+    //Add Transfer Date
+    currentAccount.movementsDates.push(new Date().toISOString());
+    receiverAcc.movementsDates.push(new Date().toISOString());
+
+    //Update UI
+    updateUI(currentAccount);
+
+    //Reset timer
+    clearInterval(timer);
+    timer = startLogOutTimer();
   }
 });
 
@@ -234,14 +298,20 @@ btnLoan.addEventListener('click', function (e) {
   const amount = Math.floor(inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
-    //ADD movement
-    currentAccount.movements.push(amount);
+    setTimeout(function () {
+      //ADD movement
+      currentAccount.movements.push(amount);
 
-    //Add Transfer Date
-    currentAccount.movementsDates.push(new Date().toISOString());
+      //Add Transfer Date
+      currentAccount.movementsDates.push(new Date().toISOString());
 
-    //UPDATE UI
-    updateUI(currentAccount);
+      //UPDATE UI
+      updateUI(currentAccount);
+
+      //Reset timer
+      clearInterval(timer);
+      timer = startLogOutTimer();
+    }, 3000);
   }
   inputLoanAmount.value = '';
 });
@@ -269,35 +339,6 @@ btnClose.addEventListener('click', function (e) {
   inputCloseUsername.value = inputClosePin.value = '';
 });
 
-btnTransfer.addEventListener('click', function (e) {
-  e.preventDefault();
-  const amount = +inputTransferAmount.value;
-  const receiverAcc = accounts.find(
-    acc => acc.username === inputTransferTo.value
-  );
-  inputTransferAmount.value = inputTransferTo.value = '';
-
-  if (
-    amount > 0 &&
-    receiverAcc &&
-    currentAccount.balance >= amount &&
-    receiverAcc?.username !== currentAccount.username
-  ) {
-    //DO TRANSFER
-    currentAccount.movements.push(-amount);
-    receiverAcc.movements.push(amount);
-
-    //Add Transfer Date
-    currentAccount.movementsDates.push(new Date().toISOString());
-    receiverAcc.movementsDates.push(new Date().toISOString());
-
-    //Update UI
-    updateUI(currentAccount);
-  }
-
-  inputCloseUsername.value = inputClosePin.value = '';
-});
-
 let sorted = false;
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
@@ -309,12 +350,12 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 // LECTURES
 
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
