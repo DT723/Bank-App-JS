@@ -261,6 +261,10 @@ h2 {
   transition: all 0.3s;
 }
 
+.form__input.form__input--user {
+  display: none;
+}
+
 .form__input:focus {
   outline: none;
   background-color: rgba(255, 255, 255, 0.6);
@@ -278,6 +282,17 @@ h2 {
   background-color: #fff;
   cursor: pointer;
   transition: all 0.3s;
+}
+
+.form__btn.form__btn--close {
+  width: 90%;
+  font-size: 1.5rem;
+  padding: 5px 0px;
+}
+
+.form__btn.form__btn--close:hover {
+  outline: none;
+  background-color: rgba(245, 182, 182, 0.8);
 }
 
 .form__btn:focus {
