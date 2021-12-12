@@ -73,6 +73,27 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const targetDiv = document.getElementById('selectUserDiv');
+const userSelection1 = document.getElementById('btn--user1');
+const userSelection2 = document.getElementById('btn--user2');
+
+// account selection
+userSelection1.onclick = function () {
+  if (targetDiv.style.display !== 'none') {
+    targetDiv.style.display = 'none';
+  } else {
+    targetDiv.style.display = 'block';
+  }
+};
+
+userSelection2.onclick = function () {
+  if (targetDiv.style.display !== 'none') {
+    targetDiv.style.display = 'none';
+  } else {
+    targetDiv.style.display = 'block';
+  }
+};
+
 const formatMovementDate = function (date, locale) {
   const calcDaysPassed = (date1, date2) =>
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
@@ -258,6 +279,7 @@ btnLogin.addEventListener('click', function (e) {
 
     //Update UI
     updateUI(currentAccount);
+    targetDiv.style.display = 'none';
   }
 });
 

@@ -83,6 +83,38 @@ nav {
   color: #777;
 }
 
+.selectUser {
+  padding: 15px;
+  background-image: linear-gradient(to top left, #d7e6df, #c7ddb4);
+  margin-top: 20px;
+  display: inline-block;
+  width: 100%;
+}
+
+.selectUserTitle {
+  margin-bottom: 0;
+}
+
+.selectBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom: 1rem;
+}
+
+.btn--user1,
+.btn--user2 {
+  background-image: linear-gradient(to top left, #eef5f2, #b9caa9);
+  font-size: 2.5rem;
+  cursor: pointer;
+  padding: 5px;
+  font-family: inherit;
+  width: 15rem;
+  border-radius: 10rem;
+  border: 1px solid rgb(153, 152, 152);
+}
+
 /* MAIN */
 .app {
   position: relative;
