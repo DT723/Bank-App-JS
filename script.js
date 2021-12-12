@@ -316,28 +316,28 @@ btnLoan.addEventListener('click', function (e) {
   inputLoanAmount.value = '';
 });
 
-btnClose.addEventListener('click', function (e) {
-  e.preventDefault();
+// btnClose.addEventListener('click', function (e) {
+//   e.preventDefault();
 
-  if (
-    inputCloseUsername.value === currentAccount.username &&
-    +inputClosePin.value === currentAccount.pin
-  ) {
-    const index = accounts.findIndex(
-      acc => acc.username == currentAccount.username
-    );
-    console.log(index);
+//   if (
+//     inputCloseUsername.value === currentAccount.username &&
+//     +inputClosePin.value === currentAccount.pin
+//   ) {
+//     const index = accounts.findIndex(
+//       acc => acc.username == currentAccount.username
+//     );
+//     console.log(index);
 
-    //DELETE ACCOUNT
-    accounts.splice(index, 1);
+//     //DELETE ACCOUNT
+//     accounts.splice(index, 1);
 
-    //HIDE UI
-    containerApp.style.opacity = 0;
-  }
-  labelWelcome.textContent = '';
-  labelWelcome.textContent = 'Log in to get started';
-  inputCloseUsername.value = inputClosePin.value = '';
-});
+//     //HIDE UI
+//     containerApp.style.opacity = 0;
+//   }
+//   labelWelcome.textContent = '';
+//   labelWelcome.textContent = 'Log in to get started';
+//   inputCloseUsername.value = inputClosePin.value = '';
+// });
 
 let sorted = false;
 btnSort.addEventListener('click', function (e) {
@@ -345,17 +345,5 @@ btnSort.addEventListener('click', function (e) {
   displayMovements(currentAccount, !sorted);
   sorted = !sorted;
 });
-
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// LECTURES
-
-// const currencies = new Map([
-//   ['USD', 'United States dollar'],
-//   ['EUR', 'Euro'],
-//   ['GBP', 'Pound sterling'],
-// ]);
-
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
