@@ -288,7 +288,7 @@ userSelection2.addEventListener("click", () => {
   showAccount(account1);
 });
 ///////////////////////////////////////////////////////////////////////////////////
-/
+
 
 btnLogin.addEventListener("click", function (e) {
   //PREVENT FORM FROM SUBMIT
