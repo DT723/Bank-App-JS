@@ -77,24 +77,6 @@ const targetDiv = document.getElementById("selectUserDiv");
 const userSelection1 = document.getElementById("btn--user1");
 const userSelection2 = document.getElementById("btn--user2");
 
-// account selection
-
-const showAccount = account => {
-  currentAccount = account;
-  display(currentAccount);
-  containerApp.style.opacity = 100;
-  labelWelcome.textContent = `Welcome back, ${
-    currentAccount.owner.split(' ')[0]
-  }`;
-};
-
-document.getElementById('btn--user1').addEventListener('click', () => {
-  showAccount(account1);
-});
-
-document.getElementById('btn--user2').addEventListener('click', () => {
-  showAccount(account2);
-});
 
 const login = function (user) {
   currentAccount = accounts.find(acc => acc.username === user);
@@ -281,10 +263,10 @@ const startLogOutTimer = function () {
 let currentAccount, timer;
 
 ///////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////
 
-//! I added this
+
+//added this//
+//account selection//
 
 const showAccount = (account) => {
   currentAccount = account;
@@ -299,15 +281,14 @@ const showAccount = (account) => {
 };
 
 userSelection1.addEventListener("click", () => {
-  showAccount(account1);
+  showAccount(account2);
 });
 
 userSelection2.addEventListener("click", () => {
-  showAccount(account2);
+  showAccount(account1);
 });
 ///////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////
+/
 
 btnLogin.addEventListener("click", function (e) {
   //PREVENT FORM FROM SUBMIT
