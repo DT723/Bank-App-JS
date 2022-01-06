@@ -78,12 +78,63 @@ const userSelection1 = document.getElementById("btn--user1");
 const userSelection2 = document.getElementById("btn--user2");
 
 // account selection
+
+const showAccount = account => {
+  currentAccount = account;
+  display(currentAccount);
+  containerApp.style.opacity = 100;
+  labelWelcome.textContent = `Welcome back, ${
+    currentAccount.owner.split(' ')[0]
+  }`;
+};
+
+document.getElementById('btn--user1').addEventListener('click', () => {
+  showAccount(account1);
+});
+
+document.getElementById('btn--user2').addEventListener('click', () => {
+  showAccount(account2);
+});
+
+const login = function (user) {
+  currentAccount = accounts.find(acc => acc.username === user);
+  // DISPLAY UI AND WELCOME MESSAGE
+  labelWelcome.textContent = `Welcome Back, ${
+    currentAccount.owner.split(' ')[0]
+  }`;
+  containerApp.style.opacity = 1;
+
+  //Create Current Date & Time
+  const now = new Date();
+  const options = {
+    hour: 'numeric',
+    minute: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    year: 'numeric',
+  };
+
+  labelDate.textContent = new Intl.DateTimeFormat(
+    currentAccount.locale,
+    options
+  ).format(now);
+
+  //CLEAR INPUT FIELDS
+  inputLoginUsername.value = inputLoginPin.value = '';
+  inputLoginPin.blur();
+
+  //Update UI
+  updateUI(currentAccount);
+  targetDiv.style.display = 'none';
+};
+
 userSelection1.onclick = function () {
   if (targetDiv.style.display !== "none") {
     targetDiv.style.display = "none";
   } else {
     targetDiv.style.display = "block";
   }
+  login();
 };
 
 userSelection2.onclick = function () {
