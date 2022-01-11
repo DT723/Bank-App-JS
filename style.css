@@ -85,7 +85,7 @@ nav {
 
 .selectUser {
   padding: 15px;
-  background-image: linear-gradient(to top left, #d7e6df, #c7ddb4);
+  background-image: linear-gradient(to top left, #e8f8e1, #c2cfb5);
   margin-top: 20px;
   display: inline-block;
   width: 100%;
@@ -105,14 +105,14 @@ nav {
 
 .btn--user1,
 .btn--user2 {
-  background-image: linear-gradient(to top left, #eef5f2, #b9caa9);
+  background-image: linear-gradient(to top left, #eef5f2, #d7e4cb);
   font-size: 2.5rem;
   cursor: pointer;
   padding: 5px;
   font-family: inherit;
   width: 15rem;
   border-radius: 10rem;
-  border: 1px solid rgb(206, 80, 80);
+  border: 1px solid rgb(27, 27, 27);
 }
 
 /* MAIN */
