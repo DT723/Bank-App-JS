@@ -79,7 +79,7 @@ nav {
 
 .selectUser {
   padding: 15px;
-  background-image: linear-gradient(to top left, #e8f8e1, #c2cfb5);
+  background-image: linear-gradient(to top left, #ececec, #dddddd);
   margin-top: 20px;
   display: inline-block;
   width: 100%;
@@ -99,7 +99,7 @@ nav {
 
 .btn--user1,
 .btn--user2 {
-  background-image: linear-gradient(to top left, #eef5f2, #d7e4cb);
+  background-image: linear-gradient(to top left, #e6e6e6, #c5c5c5);
   font-size: 2.5rem;
   cursor: pointer;
   padding: 5px;
